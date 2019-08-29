@@ -1,6 +1,15 @@
 ﻿#include "stdafx.h"
 #include "AudioConverterProxy.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#include "libavformat/avformat.h"
+#include "libswresample/swresample.h"
+#include "libavutil/avassert.h"
+#include "libavutil/audio_fifo.h"
+}
+#endif
 
 /**
 * Open an input file and the required decoder.
