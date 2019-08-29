@@ -1,5 +1,15 @@
 ﻿#include "stdafx.h"
-#include "AudioConverterProxy.h"
+#include "AacConverter.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#include "libavformat/avformat.h"
+#include "libswresample/swresample.h"
+#include "libavutil/avassert.h"
+#include "libavutil/audio_fifo.h"
+}
+#endif
 
 
 /**
@@ -20,7 +30,7 @@ static int open_input_file(const char *filename,
 	/* Open the input file to read from it. */
 	if ((error = avformat_open_input(input_format_context, filename, NULL,
 		NULL)) < 0) {
-		char err[AV_ERROR_MAX_STRING_SIZE] = {0};
+		char err[AV_ERROR_MAX_STRING_SIZE] = { 0 };
 		av_make_error_string(err, AV_ERROR_MAX_STRING_SIZE, error);
 
 		fprintf(stderr, "Could not open input file '%s' (error '%s')\n",
@@ -144,8 +154,8 @@ static int open_output_file(const char *filename,
 	}
 
 	/* Find the encoder to be used by its name. */
-	if (!(output_codec = avcodec_find_encoder(AV_CODEC_ID_PCM_S16LE))) {
-		fprintf(stderr, "Could not find a PCM encoder.\n");
+	if (!(output_codec = avcodec_find_encoder(AV_CODEC_ID_AAC))) {
+		fprintf(stderr, "Could not find an AAC encoder.\n");
 		goto cleanup;
 	}
 
@@ -785,7 +795,7 @@ static int write_output_file_trailer(AVFormatContext *output_format_context)
 	return 0;
 }
 
-bool AudioConverterProxy::TransAacToWav(const string& aacPath, const string& wavPath)
+bool AacConverter::TransAudio(const string& audioPath, const string& aacPath)
 {
 	AVFormatContext *input_format_context = NULL, *output_format_context = NULL;
 	AVCodecContext *input_codec_context = NULL, *output_codec_context = NULL;
@@ -794,11 +804,11 @@ bool AudioConverterProxy::TransAacToWav(const string& aacPath, const string& wav
 	int ret = AVERROR_EXIT;
 
 	/* Open the input file for reading. */
-	if (open_input_file(aacPath.c_str(), &input_format_context,
+	if (open_input_file(audioPath.c_str(), &input_format_context,
 		&input_codec_context))
 		goto cleanup;
 	/* Open the output file for writing. */
-	if (open_output_file(wavPath.c_str(), input_codec_context,
+	if (open_output_file(aacPath.c_str(), input_codec_context,
 		&output_format_context, &output_codec_context))
 		goto cleanup;
 	/* Initialize the resampler to be able to convert audio sample formats. */

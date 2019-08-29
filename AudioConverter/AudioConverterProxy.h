@@ -23,9 +23,6 @@ extern "C"
 class AudioConverterProxy
 {
 public:
-	AudioConverterProxy();
-	~AudioConverterProxy();
-
 	static bool TransAacToWav(const string& aacPath, const string& wavPath);
 };
 

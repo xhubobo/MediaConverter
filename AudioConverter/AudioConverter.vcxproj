@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Share\CodeConverter.h" />
+    <ClInclude Include="AacConverter.h" />
     <ClInclude Include="AudioConverter.h" />
     <ClInclude Include="AudioConverterHelper.h" />
     <ClInclude Include="AudioConverterProxy.h" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Share\CodeConverter.cpp" />
+    <ClCompile Include="AacConverter.cpp" />
     <ClCompile Include="AudioConverter.cpp" />
     <ClCompile Include="AudioConverterHelper.cpp" />
     <ClCompile Include="AudioConverterProxy.cpp" />

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifdef AUDIOCONVERTER_EXPORTS
 #define AUDIOCONVERTER_API extern "C" _declspec(dllexport)
@@ -8,7 +8,10 @@
 
 AUDIOCONVERTER_NAMESPACE_BEGIN
 
-//AACתWAV
+//AAC2WAV
 AUDIOCONVERTER_API bool TransAacToWav(const wchar_t* szAacPath, const wchar_t* szWavPath);
+
+//Any2AAC
+AUDIOCONVERTER_API bool TransAudioToAac(const wchar_t* szAudioPath, const wchar_t* szAacPath);
 
 AUDIOCONVERTER_NAMESPACE_END
