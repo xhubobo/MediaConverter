@@ -19,11 +19,6 @@ namespace AudioConverterTestWinform
             _toolTipAacPath2 = new ToolTip { ShowAlways = true };
             _toolTipWavPath1 = new ToolTip { ShowAlways = true };
             _toolTipWavPath2 = new ToolTip { ShowAlways = true };
-
-            textBoxAacPath1.Text = @"E:\Music\程小小 - 瞬间.mp3";
-            textBoxAacPath2.Text = @"E:\Music\程小小 - 瞬间.aac";
-            textBoxWavPath1.Text = @"E:\Music\程小小 - 瞬间.aac";
-            textBoxWavPath2.Text = @"E:\Music\程小小 - 瞬间.wav";
         }
 
         #region AAC
@@ -100,7 +95,7 @@ namespace AudioConverterTestWinform
                 return;
             }
 
-            var ret = AudioConverterWrapperX64.TransAudioToAac(textBoxAacPath1.Text, textBoxAacPath2.Text);
+            var ret = AudioConverterWrapper.TransAudioToAac(textBoxAacPath1.Text, textBoxAacPath2.Text);
             MessageBox.Show($"TransAudioToAac result: {ret}");
         }
         #endregion
@@ -181,7 +176,7 @@ namespace AudioConverterTestWinform
 
             try
             {
-                var ret = AudioConverterWrapperX64.TransAacToWav(textBoxWavPath1.Text, textBoxWavPath2.Text);
+                var ret = AudioConverterWrapper.TransAacToWav(textBoxWavPath1.Text, textBoxWavPath2.Text);
                 MessageBox.Show($"TransAacToWav result: {ret}");
             }
             catch (Exception e)
